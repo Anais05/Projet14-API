@@ -3,7 +3,6 @@ const bcrypt = require('bcrypt')
 const jwt = require('jsonwebtoken')
 const { ObjectId } = require('mongodb')
 
-
 module.exports.loginUser = async (req, res) => {
   let response = {}
 
