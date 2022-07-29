@@ -1,33 +1,15 @@
-const Admin = require('../models/adminModel')
-const bcrypt = require('bcrypt')
-const jwt = require('jsonwebtoken')
-const { ObjectId } = require('mongodb')
+const userService = require('../userService')
 
 module.exports.loginUser = async (req, res) => {
   let response = {}
 
   try {
-    const admin = await Admin.findOne({ email: req.email })
-    const isValid = await bcrypt.compare(req.password, admin.password)
-
-    if (!admin) {
-      throw new Error('User not found!')
-    }
-
-    if (!isValid) {
-      throw new Error('Password is invalid')
-    }
-
-    const token = jwt.sign(
-      { id: admin._id },
-      process.env.SECRET_KEY || 'default-secret-key',
-      { expiresIn: '1d' }
-    )
-
-    response.body = token
+    const responseFromService = await userService.loginUser(req.body)
     response.status = 200
+    response.message = 'Admin successfully logged in'
+    response.body = responseFromService
   } catch (error) {
-    console.error('Error in loginUser (userController.js)', error)
+    console.error('Error in loginUser (userController.js)')
     response.status = 400
     response.message = error.message
   }
