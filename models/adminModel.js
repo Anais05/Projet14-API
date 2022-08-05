@@ -11,7 +11,6 @@ const adminSchema = new mongoose.Schema(
       transform: (doc, ret, options) => {
         ret.id = ret._id
         delete ret._id
-        delete ret.password
         delete ret.__v
         return ret
       }
@@ -19,4 +18,4 @@ const adminSchema = new mongoose.Schema(
   }
 )
 
-module.exports = mongoose.model('Admin', adminSchema)
+module.exports = mongoose.model('Admin', adminSchema, 'admin')

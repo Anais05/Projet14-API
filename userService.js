@@ -4,11 +4,13 @@ const jwt = require('jsonwebtoken')
 
 module.exports.loginUser = async serviceData => {
   try {
-    const admin = await Admin.find({email: serviceData.email})
+    const admin = await Admin.findOne({email: serviceData.email})
+    console.log(serviceData)
 
     if (!admin) {
       throw new Error('User not found!')
     }
+    console.log(admin)
 
     const isValid = bcrypt.compare(serviceData.password, admin.password)
 
