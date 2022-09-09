@@ -46,3 +46,65 @@ module.exports.getEmployeeProfile = async () => {
     throw new Error(error)
   }
 }
+
+module.exports.addEmployee = async serviceData => {
+  try {
+    const newUser = new Employee ({
+      firstName: serviceData.firstName,
+      lastName: serviceData.lastName,
+      birthDay: serviceData.birthDay,
+      startDate: serviceData.startDate,
+      street: serviceData.street,
+      city: serviceData.city,
+      state: serviceData.state,
+      zipCode: serviceData.zipCode,
+      department: serviceData.department,
+    })
+    let result = await newUser.save()
+
+    return result
+  } catch (error) {
+    console.error('Error in userService.js', error)
+    throw new Error(error)
+  }
+}
+
+module.exports.updateEmployee = async serviceData => {
+  try {
+    const employee = await Employee.findOneAndUpdate(
+      { _id: serviceData.id },
+      {
+        firstName: serviceData.body.firstName,
+        lastName: serviceData.body.lastName,
+        birthDay: serviceData.body.birthDay,
+        startDate: serviceData.body.startDate,
+        street: serviceData.body.street,
+        city: serviceData.body.city,
+        state: serviceData.body.state,
+        zipCode: serviceData.body.zipCode,
+        department: serviceData.body.department,
+      },
+      { new: true }
+    )
+
+    if (!employee) {
+      throw new Error('User not found!')
+    }
+
+    return employee.toObject()
+  } catch (error) {
+    console.error('Error in userService.js', error)
+    throw new Error(error)
+  }
+}
+
+module.exports.deleteEmployee = async serviceData => {
+  try {
+    await Employee.deleteOne(
+      { _id: serviceData.id },
+    )
+  } catch (error) {
+    console.error('Error in userService.js', error)
+    throw new Error(error)
+  }
+}
