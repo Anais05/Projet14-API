@@ -58,7 +58,23 @@ module.exports.updateEmployee = async (req, res) => {
     response.message = 'Successfully updated employee'
     response.body = responseFromService
   } catch (error) {
-    console.log('Error in updateUserProfile - userController.js')
+    console.log('Error in updateEmployee - userController.js')
+    response.status = 400
+    response.message = error.message
+  }
+
+  return res.status(response.status).send(response)
+}
+
+module.exports.deleteEmployee = async (req, res) => {
+  let response = {}
+
+  try {
+    await userService.deleteEmployee(req)
+    response.status = 200
+    response.message = 'Successfully delete employee'
+  } catch (error) {
+    console.log('Error in deleteEmployee - userController.js')
     response.status = 400
     response.message = error.message
   }

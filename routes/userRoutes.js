@@ -5,8 +5,11 @@ router.post('/login', userController.loginUser)
 
 router.get('/employee-list', userController.getEmployeeList)
 
-router.post('/create', userController.createEmployee)
+router.post('/create-employee', userController.createEmployee)
 
-router.put('/create', userController.updateEmployee)
+router.put('/edit-employee', userController.updateEmployee)
+
+router.delete('/delete-employee', userController.deleteEmployee)
+
 
 module.exports = router
