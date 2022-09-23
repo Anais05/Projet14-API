@@ -9,7 +9,7 @@ router.post('/create-employee', userController.createEmployee)
 
 router.put('/edit-employee', userController.updateEmployee)
 
-router.delete('/delete-employee', userController.deleteEmployee)
+router.delete('/delete-employee/:id', userController.deleteEmployee)
 
 
 module.exports = router

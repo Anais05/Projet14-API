@@ -103,6 +103,7 @@ module.exports.deleteEmployee = async serviceData => {
     await Employee.deleteOne(
       { _id: serviceData.id },
     )
+    console.log(serviceData)
   } catch (error) {
     console.error('Error in userService.js', error)
     throw new Error(error)

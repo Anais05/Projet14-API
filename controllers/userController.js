@@ -43,7 +43,7 @@ module.exports.createEmployee = async (req, res) => {
     response.message = 'employee successfully created'
     response.body = responseFromService
   } catch (error) {
-    console.error('Something went wrong in userController.js', error)
+    console.error('Error in createEmployee (userController.js)', error)
     response.status = 400
     response.message = error.message
   }
@@ -58,7 +58,7 @@ module.exports.updateEmployee = async (req, res) => {
     response.message = 'Successfully updated employee'
     response.body = responseFromService
   } catch (error) {
-    console.log('Error in updateEmployee - userController.js')
+    console.log('Error in updateEmployee (userController).js')
     response.status = 400
     response.message = error.message
   }
@@ -70,11 +70,11 @@ module.exports.deleteEmployee = async (req, res) => {
   let response = {}
 
   try {
-    await userService.deleteEmployee(req)
+    await userService.deleteEmployee(req.params)
     response.status = 200
     response.message = 'Successfully delete employee'
   } catch (error) {
-    console.log('Error in deleteEmployee - userController.js')
+    console.log('Error in deleteEmployee (userController).js')
     response.status = 400
     response.message = error.message
   }
