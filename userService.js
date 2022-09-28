@@ -6,7 +6,6 @@ const jwt = require('jsonwebtoken')
 module.exports.loginUser = async serviceData => {
   try {
     const admin = await Admin.findOne({email: serviceData.email})
-    console.log(serviceData)
 
     if (!admin) {
       throw new Error('User not found!')
@@ -34,7 +33,6 @@ module.exports.loginUser = async serviceData => {
 module.exports.getEmployeeProfile = async () => {
   try {
     const employee = await Employee.find()
-    console.log(employee)
 
     if (!employee) {
       throw new Error('User not found!')
@@ -57,6 +55,7 @@ module.exports.addEmployee = async serviceData => {
       street: serviceData.street,
       city: serviceData.city,
       state: serviceData.state,
+      stateAb: serviceData.stateAb,
       zipCode: serviceData.zipCode,
       department: serviceData.department,
     })
@@ -70,6 +69,7 @@ module.exports.addEmployee = async serviceData => {
 }
 
 module.exports.updateEmployee = async serviceData => {
+  console.log(serviceData)
   try {
     const employee = await Employee.findOneAndUpdate(
       { _id: serviceData.id },
@@ -81,11 +81,15 @@ module.exports.updateEmployee = async serviceData => {
         street: serviceData.body.street,
         city: serviceData.body.city,
         state: serviceData.body.state,
+        stateAb: serviceData.body.stateAb,
         zipCode: serviceData.body.zipCode,
         department: serviceData.body.department,
       },
       { new: true }
     )
+
+    console.log(employee)
+
 
     if (!employee) {
       throw new Error('User not found!')
@@ -103,7 +107,6 @@ module.exports.deleteEmployee = async serviceData => {
     await Employee.deleteOne(
       { _id: serviceData.id },
     )
-    console.log(serviceData)
   } catch (error) {
     console.error('Error in userService.js', error)
     throw new Error(error)

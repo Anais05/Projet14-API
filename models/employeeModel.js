@@ -9,6 +9,7 @@ const employeeSchema = new mongoose.Schema(
     street: String,
     city: String,
     state: String,
+    stateAb: String,
     zipCode: String,
     department: String,
   },
