@@ -69,10 +69,9 @@ module.exports.addEmployee = async serviceData => {
 }
 
 module.exports.updateEmployee = async serviceData => {
-  console.log(serviceData)
   try {
     const employee = await Employee.findOneAndUpdate(
-      { _id: serviceData.id },
+      { _id: serviceData.params.id },
       {
         firstName: serviceData.body.firstName,
         lastName: serviceData.body.lastName,
@@ -87,9 +86,6 @@ module.exports.updateEmployee = async serviceData => {
       },
       { new: true }
     )
-
-    console.log(employee)
-
 
     if (!employee) {
       throw new Error('User not found!')

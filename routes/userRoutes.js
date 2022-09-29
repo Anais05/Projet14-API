@@ -7,7 +7,7 @@ router.get('/employee-list', userController.getEmployeeList)
 
 router.post('/create-employee', userController.createEmployee)
 
-router.put('/edit-employee', userController.updateEmployee)
+router.put('/edit-employee/:id', userController.updateEmployee)
 
 router.delete('/delete-employee/:id', userController.deleteEmployee)
 
