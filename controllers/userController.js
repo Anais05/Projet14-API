@@ -47,6 +47,7 @@ module.exports.createEmployee = async (req, res) => {
     response.status = 400
     response.message = error.message
   }
+  return res.status(response.status).send(response)
 }
 
 module.exports.updateEmployee = async (req, res) => {
