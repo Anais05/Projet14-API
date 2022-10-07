@@ -1,5 +1,6 @@
 // establish an express app
 const express = require('express')
+
 const app = express()
 
 // allow requests from outside resources like frontend
@@ -20,6 +21,10 @@ dbConnection()
 // Handle custom routes
 const userRoutes = require('./routes/userRoutes')
 app.use('/api/user', userRoutes)
+
+// Have Node serve the files for our built React app
+const path = require('path');
+app.use(express.static(path.resolve(__dirname, '../client/build')));
 
 const PORT = process.env.PORT || 3001
 app.listen(PORT, ()=>{

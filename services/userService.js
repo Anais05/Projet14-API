@@ -1,7 +1,30 @@
-const Admin = require('./models/adminModel')
-const Employee = require('./models/employeeModel')
+const Admin = require('../models/adminModel')
+const Employee = require('../models/employeeModel')
 const bcrypt = require('bcrypt')
 const jwt = require('jsonwebtoken')
+
+module.exports.createAdmin = async serviceData => {
+  try {
+    const admin = await Admin.findOne({ email: serviceData.email })
+    if (admin) {
+      throw new Error('Email already exists')
+    }
+
+    const hashPassword = await bcrypt.hash(serviceData.password, 12)
+
+    const newAdmin = new Admin({
+      email: serviceData.email,
+      password: hashPassword,
+    })
+
+    let result = await newAdmin.save()
+
+    return result
+  } catch (error) {
+    console.error('Error in userService.js', error)
+    throw new Error(error)
+  }
+}
 
 module.exports.loginUser = async serviceData => {
   try {
