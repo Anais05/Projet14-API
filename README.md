@@ -35,7 +35,7 @@ npm install
 # Start local dev server
 npm run dev:server
 
-# Populate database with two users
+# Populate database with Admin for login
 npm run populate-db
 ```
 
