@@ -6,8 +6,7 @@
   "scripts": {
     "populate-db": "node ./scripts/populateDatabase.js",
     "dev:server": "nodemon ./server.js",
-    "server": "node ./server.js",
-    "build": "cd client && npm install && npm run build"
+    "server": "node ./server.js"
   },
   "author": "",
   "license": "ISC",
